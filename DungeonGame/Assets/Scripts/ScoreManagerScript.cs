@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;  // Dette bruges til at opdatere UI-elementer
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManagerScript : MonoBehaviour
 {
     public int score = 0; // Dette holder styr på spillerens score
     public Text scoreText; // UI tekstfelt, som viser scoren
@@ -9,8 +9,10 @@ public class ScoreManager : MonoBehaviour
     // Denne funktion tilføjer point
     public void AddPoints(int points)
     {
-        score += points;  // Opdater scoren med de tilføjede point
-        UpdateScoreText();  // Opdater teksten på skærmen
+        score += points; 
+        Debug.Log(score);
+        // Opdater scoren med de tilføjede point
+       // UpdateScoreText();  // Opdater teksten på skærmen
     }
 
     // Denne funktion opdaterer score-teksten

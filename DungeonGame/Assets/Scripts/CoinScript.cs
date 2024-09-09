@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class Coin : MonoBehaviour
 {
     public int coinValue = 1; // Værdi af mønten
+    [SerializeField] private ScoreManagerScript scoreManager;
 
     void OnTriggerEnter(Collider other)
     {
@@ -11,10 +12,10 @@ public class Coin : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             // Tilføjer point til spillerens score
-            FindObjectOfType<ScoreManager>().AddPoints(coinValue);
+            scoreManager.AddPoints(coinValue);
 
             // Ødelæg mønten efter at spilleren har samlet den op
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 }
