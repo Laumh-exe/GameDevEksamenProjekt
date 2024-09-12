@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour{
         }
         else {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * tiltSpeed);
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            transform.position = new Vector3(transform.position.x, 1, transform.position.z);
         }
     }
 
