@@ -299,6 +299,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  playerModel: {fileID: 8450617136821054714}
 --- !u!1 &8450617136821054714
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1853251743485726299}
   - component: {fileID: 5174048362967332068}
+  - component: {fileID: 386950596813582729}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -346,3 +348,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiltSpeed: 50
   player: {fileID: 8535394609496009918}
+--- !u!114 &386950596813582729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450617136821054714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b158354b8a83740aeaf556b0990cdfde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

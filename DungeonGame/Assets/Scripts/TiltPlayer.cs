@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TiltPlayer : MonoBehaviour
@@ -26,13 +27,14 @@ public class TiltPlayer : MonoBehaviour
             Tilt();
         }
         else {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * tiltSpeed);
+            //Check if tilting back
+
+            Quaternion targetRotation = player.transform.rotation;
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * tiltSpeed);
             //transform.position = new Vector3(transform.position.x, 1, transform.position.z);
            // player.SetSpeed(baseMovementSpeed);
+           
         }
-        
-        //const float rotateSpeed = 10f;
-        //transform.forward = Vector3.Slerp(transform.forward, player.GetMoveDirection(), Time.deltaTime * rotateSpeed);
     }
     
     private void Tilt(){
