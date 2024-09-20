@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BallScript : MonoBehaviour
+public class BulletBall : MonoBehaviour
 {
     
     [SerializeField] private float moveSpeed;
@@ -15,19 +15,13 @@ public class BallScript : MonoBehaviour
     {
         MoveBall();
     }
-    
-    void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-        ChangeDirection();
-    }
 
     private void MoveBall(){
         
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
     }
 
-    private void ChangeDirection(){
+    public void ChangeDirection(){
         moveDirection = moveDirection * -1;
     }
 }
