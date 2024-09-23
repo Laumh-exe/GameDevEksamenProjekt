@@ -1,21 +1,17 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Coin : MonoBehaviour
 {
-    public int coinValue = 1; // Værdi af mønten
-    [SerializeField] private ScoreManagerScript scoreManager;
+    public int coinValue = 1; // Antallet af point, mønten giver
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hit");
-        // Tjekker om den genstand, der kolliderer med mønten, er spilleren
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player")) // Sørg for at spilleren har taggen "Player"
         {
-            // Tilføjer point til spillerens score
-            scoreManager.AddPoints(coinValue);
-            Debug.Log("Hit player");
-            // Ødelæg mønten efter at spilleren har samlet den op
+            // Find ScoreManager og tilføj point
+            FindObjectOfType<ScoreManager>().AddPoints(coinValue);
+
+            // Fjern mønten fra scenen
             Destroy(gameObject);
         }
     }
