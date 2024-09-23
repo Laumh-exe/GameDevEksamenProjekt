@@ -1,4 +1,4 @@
-[Group 1 READme](#top-of-readme)
+[Group 1 READme](#group-1-readme)
 ## TO DO:
 1. Lasers (obstacles.
 2. Health management.
