@@ -116,25 +116,10 @@ MonoBehaviour:
     - model: {fileID: 8926484042661617843}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 8926484042661617844}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661617885}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661617862}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 8926484042661617818}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 8926484042661617819}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 8926484042661617836}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661617837}
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661617568}
@@ -173,7 +158,7 @@ MonoBehaviour:
     x: -847
     y: -1108
     width: 4717
-    height: 3867
+    height: 3863
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,7 +298,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 500000
+      m_SerializableObject: 5000
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -1557,7 +1542,8 @@ MonoBehaviour:
     - outputSlot: {fileID: 8926484042661617511}
       inputSlot: {fileID: 8926484042661618034}
     position: {x: 315, y: 1908}
-    expandedSlots: []
+    expandedSlots:
+    - {fileID: 8926484042661617511}
     expanded: 1
     supecollapsed: 0
 --- !u!114 &8926484042661617511
@@ -10756,7 +10742,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 500000
+      m_SerializableObject: 5000
     m_Space: -1
   m_Property:
     name: o
@@ -10918,7 +10904,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.01
+      m_SerializableObject: 0.1
     m_Space: -1
   m_Property:
     name: Min
@@ -10952,7 +10938,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.02
+      m_SerializableObject: 0.2
     m_Space: -1
   m_Property:
     name: Max
