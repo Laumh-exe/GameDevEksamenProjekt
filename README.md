@@ -1,5 +1,5 @@
 ## TO DO:
-1. Lasers.
+1. Lasers (obstacles.
 2. Health management.
 3. Dungeon rooms scaled (needs to feel properly sized and focused).
 4. Connected rooms, trigger for door to open.
