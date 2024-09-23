@@ -1,18 +1,17 @@
 using UnityEngine;
 
-public class BulletCollision : MonoBehaviour{
+public class BulletCollision : MonoBehaviour {
     [SerializeField] private BulletBall bullet;
 
     private GameObject currentCollision;
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        
-        Debug.Log(" collided with " + collision.gameObject.name);
-        if (currentCollision==null || currentCollision.gameObject != collision.gameObject) {
-            Debug.Log("Changing Direction");
-            bullet.ChangeDirection();
+        if (currentCollision==null || currentCollision.gameObject != other.gameObject) {
+            if(other.gameObject.CompareTag("Wall")) {
+                bullet.ChangeDirection();
+            }
 
         }
-        currentCollision = collision.gameObject;
+        currentCollision = other.gameObject;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletBall : MonoBehaviour, IDamage
+public class BulletBall : MonoBehaviour
 {
     
     [SerializeField] private float moveSpeed;
