@@ -23,4 +23,6 @@
 - An agent is deloyed to a loction and has to infiltrate the enemies secret base. 
 - The agent operates a robot remotely, this robot is set to do certain tasks to bypass obstacles and move to the next room slowly getting closer to core of the base.
 - The agents objective using the robot is to plant bombs at certain locations throughout the base. 
-             
+
+### Symbol meanings:
+* = Nice to have
