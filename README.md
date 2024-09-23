@@ -25,4 +25,4 @@
 - The agents objective using the robot is to plant bombs at certain locations throughout the base. 
 
 ### Symbol meanings:
-* = Nice to have
+(*) = Nice to have
