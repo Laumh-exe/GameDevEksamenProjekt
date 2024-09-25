@@ -50,7 +50,9 @@ public class TiltPlayer : MonoBehaviour
             
             Quaternion targetRotation = Quaternion.Euler(tiltAngle, 0, 0);
             transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * tiltSpeed);
-
+        
+            //How to imrpove this
+            //When clicking mouse - you will pull small circle from whereever you clicked. The more you pull circle up, the more player will tilt up. The more you pull circle down, the more player will tilt down. This way tilting amount is base on where mouse is dragged to and direction is based on direction on monitor
             
         }
     }
