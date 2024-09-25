@@ -13,10 +13,8 @@ public class PlayerCollision : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other){
-        Debug.Log("Collision detechted with: " + other.gameObject.name + " with tag: " + other.gameObject.tag);
         if (other.gameObject.CompareTag("DamageObject")) {
             healthManager.TakeDamage();
-            Debug.Log("Should have taken damage here");
         }
     }
 }

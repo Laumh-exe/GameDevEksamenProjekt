@@ -688,6 +688,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5bf8511b699abd4b94f751d76e77c97, type: 3}
+--- !u!1 &989786756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7167469814084415737, guid: 3380ad5dd6f304349a7dde916a3ef05b, type: 3}
+  m_PrefabInstance: {fileID: 3073269361554868028}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1044499504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,11 +1088,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7689448010718945456, guid: 3380ad5dd6f304349a7dde916a3ef05b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 989786756}
+    - target: {fileID: 7689448010718945456, guid: 3380ad5dd6f304349a7dde916a3ef05b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8442377875584769735, guid: 3380ad5dd6f304349a7dde916a3ef05b, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8624256095168699387, guid: 3380ad5dd6f304349a7dde916a3ef05b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

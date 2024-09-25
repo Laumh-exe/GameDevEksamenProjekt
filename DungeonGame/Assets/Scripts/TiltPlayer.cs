@@ -5,11 +5,13 @@ using UnityEngine;
 public class TiltPlayer : MonoBehaviour
 {
     [SerializeField] private float tiltSpeed = 50f;
-    [SerializeField] private PlayerMovement player;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject tiltAxis;
     
     private PlayerInputs playerInputs;
     private Camera mainCamera;
     private float baseMovementSpeed;
+    private PlayerMovement playerMovement;
 
     private void Awake(){
         playerInputs = new PlayerInputs();
@@ -18,7 +20,8 @@ public class TiltPlayer : MonoBehaviour
     }
 
     private void Start(){
-        baseMovementSpeed = player.GetSpeed();
+        playerMovement = player.GetComponent<PlayerMovement>();
+        baseMovementSpeed = playerMovement.GetSpeed();
     }
 
     void Update()
@@ -27,38 +30,28 @@ public class TiltPlayer : MonoBehaviour
             Tilt();
         }
         else {
-            //Check if tilting back
-
             Quaternion targetRotation = player.transform.rotation;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * tiltSpeed);
-            //transform.position = new Vector3(transform.position.x, 1, transform.position.z);
-           // player.SetSpeed(baseMovementSpeed);
-           
         }
     }
     
     private void Tilt(){
         Vector2 mousePosition = playerInputs.Player.Mouse.ReadValue<Vector2>();
-        
-        //tilt amount is controlled by distance from player. max tilt is 90 degrees and can be set to a certain distance
-        //tilt direction is controlled by the direction of the mouse from the player(alternativly we just rotate the player towards the mouse)
         Ray ray = mainCamera.ScreenPointToRay(mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitInfo)) {
             Vector3 targetPosition = hitInfo.point;
             float distance = Vector3.Distance(this.transform.position, targetPosition);
+            Vector3 direction = targetPosition - player.transform.position;
+            direction.y = 0;
+            
+            float tiltAngle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+            
+            tiltAngle = Mathf.Clamp(tiltAngle, -75, 75);
+            
+            Quaternion targetRotation = Quaternion.Euler(tiltAngle, 0, 0);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * tiltSpeed);
 
-            // Calculate the tilt amount based on the distance
-            float maxTiltDistance = 10f; // Set this to the distance at which the tilt is 90 degrees
-            float tiltAmount = Mathf.Clamp((distance / maxTiltDistance) * 90f, 0f, 90f);
-            //float speedModifier = Math.Clamp(tiltAmount / baseMovementSpeed, 0, baseMovementSpeed);
-            //player.SetSpeed(baseMovementSpeed-speedModifier);
-
-            // Determine the tilt direction
-            Vector3 direction = (targetPosition - transform.position).normalized;
-
-            // Apply the tilt to the player
-            Quaternion tiltRotation = Quaternion.Euler(tiltAmount * direction.z, 0, -tiltAmount * direction.x);
-            transform.rotation = Quaternion.Slerp(transform.rotation, tiltRotation, Time.deltaTime * 1000);
+            
         }
     }
 }
