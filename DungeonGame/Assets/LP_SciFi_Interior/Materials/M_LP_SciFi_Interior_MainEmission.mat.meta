@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ed4576cb539673e41871f32e9330d297
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295497
+  packageName: Low Poly Sci-Fi Cyberpunk Interiors
+  packageVersion: 1.0
+  assetPath: Assets/LP_SciFi_Interior/Materials/M_LP_SciFi_Interior_MainEmission.mat
+  uploadId: 690348
