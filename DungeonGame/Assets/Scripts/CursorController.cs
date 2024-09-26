@@ -13,7 +13,7 @@ public class CursorController : MonoBehaviour{
 
         // Convert mouse position to normalized coordinates (-1 to 1)
         Vector2 normalizedMousePos = ScreenToNormalized(mousePos);
-        if(Input.)
+        
         
         if (Input.GetMouseButton(0)) {
             Cursor.visible = true;
