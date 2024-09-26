@@ -5,7 +5,6 @@ public class CursorController : MonoBehaviour{
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Texture2D cursorClicked;
     [SerializeField] private Texture2D cursorPull;
-    [SerializeField] private GameObject canvas;
 
     private void Update(){
         // Get mouse position in screen coordinates (pixels)
@@ -26,7 +25,7 @@ public class CursorController : MonoBehaviour{
     }
 
     private void ChangeCursor(Texture2D cursorType){
-        Vector2 cursorHotspot = new Vector2(cursorType.width / 2, cursorType.height / 2);
+        Vector2 cursorHotspot = new Vector2(cursorType.width/10, cursorType.height/10);
         Cursor.SetCursor(cursorType, cursorHotspot, CursorMode.Auto);
     }
     
