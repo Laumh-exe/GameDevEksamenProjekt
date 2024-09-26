@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
@@ -12,8 +13,9 @@ public class UITiltControls : MonoBehaviour{
     private GameObject movingImage;
     private Vector2 clickPosition;
     private Vector2 dragPosition;
-    private float yDistance;
-    
+
+    private float yDistance = 0;
+    private float xDistance = 0;
 
     void Update()
     {
@@ -58,12 +60,25 @@ public class UITiltControls : MonoBehaviour{
 
         RectTransform rectTransform = movingImage.GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, mousePosition, canvas.worldCamera, out Vector2 localPoint);
-        Vector2 dragPosition = Vector2.Lerp(clickPosition, localPoint, 0.5f);
-        rectTransform.anchoredPosition = dragPosition;
-        
-        yDistance = dragPosition.y - clickPosition.y;
+        Vector2 dragPosition = localPoint - clickPosition;
+
+        // Calculate distance from center
+        float distanceFromCenter = dragPosition.magnitude;
+
+        // Clamp to a circle of radius 200
+        if (distanceFromCenter > 200) {
+            dragPosition = dragPosition.normalized * 200; // Normalize and multiply by max radius
+        }
+
+        // Set the new position relative to the click position
+        rectTransform.anchoredPosition = clickPosition + dragPosition;
+
+        // Update position trackers for smooth movement
+        xDistance = dragPosition.x;
+        yDistance = dragPosition.y;
 
         // Log the distance for debugging
+        Debug.Log("X Distance: " + xDistance);
         Debug.Log("Y Distance: " + yDistance);
     }
 
@@ -78,5 +93,12 @@ public class UITiltControls : MonoBehaviour{
             Destroy(movingImage);
         }
     }
-
+    
+    public float GetYDistance(){
+        return yDistance;
+    }
+    
+    public float GetXDistance(){
+        return xDistance;
+    }
 }
