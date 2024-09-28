@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     private void Update(){
+        Debug.Log("Grounded: " + grounded);
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * .5f + .2f, whatIsGround);
         SpeedControl();
 
@@ -69,10 +70,8 @@ public class PlayerMovement : MonoBehaviour{
         moveDirection = transform.forward * verticalInput;
         rotateDirection = transform.right * horizontalInput;
 
-
         const float rotateSpeed = 3f;
         transform.forward = Vector3.Slerp(transform.forward, rotateDirection.normalized, Time.deltaTime * rotateSpeed);
-
 
         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
     }
@@ -85,27 +84,6 @@ public class PlayerMovement : MonoBehaviour{
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
-
-    /*private void Tilt(){
-        Vector2 mousePosition = playerInputs.Player.Mouse.ReadValue<Vector2>();
-
-        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo)) {
-            Vector3 targetPosition = hitInfo.point;
-            float distance = Vector3.Distance(this.transform.position, targetPosition);
-
-            // Calculate the tilt amount based on the distance
-            float maxTiltDistance = 10f; // Set this to the distance at which the tilt is 90 degrees
-            float tiltAmount = Mathf.Clamp((distance / maxTiltDistance) * 90f, 0f, 90f);
-            //float speedModifier = Math.Clamp(tiltAmount / baseMovementSpeed, 0, baseMovementSpeed);
-            //player.SetSpeed(baseMovementSpeed-speedModifier);
-
-            Vector3 direction = (targetPosition - transform.position).normalized;
-
-            Quaternion tiltRotation = Quaternion.Euler(tiltAmount * direction.z, 0, -tiltAmount * direction.x);
-            transform.rotation = Quaternion.Slerp(transform.rotation, tiltRotation, Time.deltaTime * 1000);
-        }
-    }*/
 
     private Vector2 GetMovementVectorNormalized(){
         Vector2 inputVector = playerInputs.Player.Movement.ReadValue<Vector2>();

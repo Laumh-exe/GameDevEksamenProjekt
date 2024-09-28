@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public int coinValue = 1; // Antallet af point, mønten giver
+    public int coinValue = 1; // Antallet af point, mï¿½nten giver
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) // Sørg for at spilleren har taggen "Player"
+        Debug.Log(other.gameObject.name);
+        if (other.gameObject.CompareTag("Player")) // Sï¿½rg for at spilleren har taggen "Player"
         {
-            // Find ScoreManager og tilføj point
+            // Find ScoreManager og tilfï¿½j point
             FindObjectOfType<ScoreManager>().AddPoints(coinValue);
 
-            // Fjern mønten fra scenen
+            // Fjern mï¿½nten fra scenen
             Destroy(gameObject);
         }
     }
