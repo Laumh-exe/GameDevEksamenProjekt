@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour{
 
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private GameObject playerModel;
-    [SerializeField] private float tiltSpeed = 50f;
 
     private bool grounded;
 
