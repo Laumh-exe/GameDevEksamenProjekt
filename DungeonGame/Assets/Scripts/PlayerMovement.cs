@@ -37,7 +37,6 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     private void Update(){
-        Debug.Log("Grounded: " + grounded);
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * .5f + .2f, whatIsGround);
         SpeedControl();
 

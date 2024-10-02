@@ -8,10 +8,9 @@ public class HealthManager : MonoBehaviour
     private int currentPlayerHealth;
     private bool isPlayerDead;
 
-    public Health healthUI; // Reference til Health scriptet
-
     private void Start()
     {
+        currentPlayerHealth = baseHealth;
         InitPlayerHealth();
     }
 
@@ -25,7 +24,7 @@ public class HealthManager : MonoBehaviour
 
     private void InitPlayerHealth()
     {
-        currentPlayerHealth = 3;
+        currentPlayerHealth = baseHealth;
         isPlayerDead = false;
         Debug.Log("Health: " + currentPlayerHealth);
     }
@@ -47,11 +46,14 @@ public class HealthManager : MonoBehaviour
         InitPlayerHealth();
     }
 
-    private void UpdateHealthUI()
+    public int GetCurrentHealth()
     {
-        if (healthUI != null)
-        {
-            healthUI.health = currentPlayerHealth; // Opdaterer Health scriptet
-        }
+        Debug.Log("Current Health: " + currentPlayerHealth);
+        return currentPlayerHealth;
+    }
+
+    public int GetMaxHealth()
+    {
+        return baseHealth;
     }
 }
