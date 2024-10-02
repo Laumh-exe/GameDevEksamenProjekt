@@ -45,4 +45,14 @@ public class HealthManager : MonoBehaviour{
         //InitPlayerHealth();
         OnDeath?.Invoke();
     }
+
+    public int GetMaxHealth()
+    {
+        return baseHealth;
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentPlayerHealth;
+    }
 }
