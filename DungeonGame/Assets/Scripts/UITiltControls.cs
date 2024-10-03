@@ -22,7 +22,6 @@ public class UITiltControls : MonoBehaviour{
         // Check if the left mouse button is pressed
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse button pressed");
             SpawnImageAtClick();
         }
 
@@ -61,25 +60,17 @@ public class UITiltControls : MonoBehaviour{
         RectTransform rectTransform = movingImage.GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, mousePosition, canvas.worldCamera, out Vector2 localPoint);
         Vector2 dragPosition = localPoint - clickPosition;
-
-        // Calculate distance from center
+        
         float distanceFromCenter = dragPosition.magnitude;
-
-        // Clamp to a circle of radius 200
+        
         if (distanceFromCenter > 200) {
             dragPosition = dragPosition.normalized * 200; // Normalize and multiply by max radius
         }
-
-        // Set the new position relative to the click position
+        
         rectTransform.anchoredPosition = clickPosition + dragPosition;
 
-        // Update position trackers for smooth movement
         xDistance = dragPosition.x;
         yDistance = dragPosition.y;
-
-        // Log the distance for debugging
-        Debug.Log("X Distance: " + xDistance);
-        Debug.Log("Y Distance: " + yDistance);
     }
 
     private void DestroyImage()

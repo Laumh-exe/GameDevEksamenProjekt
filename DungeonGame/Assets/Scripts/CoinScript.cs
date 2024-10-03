@@ -10,7 +10,7 @@ public class Coin : MonoBehaviour
         if (other.gameObject.CompareTag("Player")) // S�rg for at spilleren har taggen "Player"
         {
             // Find ScoreManager og tilf�j point
-            FindObjectOfType<ScoreManager>().AddPoints(coinValue);
+            FindFirstObjectByType<ScoreManager>().AddPoints(coinValue);
 
             // Fjern m�nten fra scenen
             Destroy(gameObject);
