@@ -693,9 +693,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001348dd86f7868408c06d547d3bf11f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  followTarget: {fileID: 3378913261548730482}
+  rotationPower: 3
   moveSpeed: 7
   groundDrag: 5
   jumpHeight: 5
+  rotationLerp: 5
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
