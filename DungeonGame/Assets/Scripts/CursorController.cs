@@ -4,10 +4,21 @@ using UnityEngine.Serialization;
 
 public class CursorController : MonoBehaviour{
     [SerializeField] private Texture2D customCursor;
+    private PlayerInputs playerInputs;
+    
+    private void Awake(){
+        playerInputs = new PlayerInputs();
+        playerInputs.CameraMovement.Enable();
+    }
 
-    private void Start(){
-        EnableCursor();
+    private void Update(){
         SetCursor(customCursor);
+        if (LeftClickInput()) {
+            EnableCursor();
+        }
+        else {
+            DisableCursor();
+        }
     }
 
     private void SetCursor(Texture2D cursorType){
@@ -25,5 +36,13 @@ public class CursorController : MonoBehaviour{
     public void EnableCursor(){
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+    }
+    
+    private void OnDestroy(){
+        playerInputs.Disable();
+    }
+    
+    private bool LeftClickInput(){
+        return playerInputs.CameraMovement.MouseLeftClick.ReadValue<float>() > 0;
     }
 }
