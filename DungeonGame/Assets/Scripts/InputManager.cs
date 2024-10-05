@@ -22,8 +22,7 @@ public class InputManager : MonoBehaviour{
         move =  value.Get<Vector2>();
     }
 
-    void Update()
-    {
-        
+    private void OnDestroy(){
+        playerInputs.Disable();
     }
 }

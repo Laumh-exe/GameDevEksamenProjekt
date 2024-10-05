@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.Serialization;
@@ -9,11 +10,12 @@ using UnityEngine.Serialization;
 public class PlayerMovement : MonoBehaviour{
     [Header("CameraMovement")] [SerializeField]
     private Transform followTarget;
-    private int minXCamClamp = -70;
+
+    private int minXCamClamp = -40;
     private int maxXCamClamp = 70;
     [SerializeField] private float rotationPower = .3f;
     [SerializeField] private GameObject mainCamera;
-    
+
 
     [Header("Movement")] [SerializeField] private float moveSpeed;
     [SerializeField] private float groundDrag;
@@ -30,7 +32,6 @@ public class PlayerMovement : MonoBehaviour{
     private float horizontalInput;
     private float verticalInput;
     private Vector3 moveDirection;
-    private Vector3 rotateDirection;
     private Rigidbody rb;
     private PlayerInputs playerInputs;
     private Vector2 lookInput;
@@ -38,6 +39,13 @@ public class PlayerMovement : MonoBehaviour{
     private float camXRotation;
     private float clickInput;
     private float cameraFollowSpeed = 5f;
+    private float rotateSpeed = 8f;
+    private float tiltSpeedModifer = 1;
+    bool isMoving = false;
+    private bool resetCameraY;
+    private bool resetCameraX;
+    private float timeSinceLastCameraMovement = 0f;
+    private float cameraResetDelay = 2f;
 
     private void Awake(){
         playerInputs = new PlayerInputs();
@@ -79,17 +87,27 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     private void Move(){
+        float speed = 0;
         horizontalInput = GetMovementVectorNormalized().x;
         verticalInput = GetMovementVectorNormalized().y;
-        
         moveDirection = transform.forward * verticalInput;
-        rotateDirection = transform.right * horizontalInput;
 
-        
-        const float rotateSpeed = 3f;
-        transform.forward = Vector3.Slerp(transform.forward, rotateDirection.normalized, Time.deltaTime * rotateSpeed);
+        Vector3 inputDirection = new Vector3(horizontalInput, 0, verticalInput);
+        float targetRotation = 0;
 
-        rb.AddForce(moveDirection * moveSpeed * 10f, ForceMode.Force);
+        if (inputDirection != Vector3.zero) {
+            isMoving = true;
+            speed = moveSpeed;
+            targetRotation = Quaternion.LookRotation(inputDirection).eulerAngles.y + mainCamera.transform.rotation.eulerAngles.y;
+            Quaternion targetRotationQuaternion = Quaternion.Euler(0, targetRotation, 0);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotationQuaternion, Time.deltaTime * rotateSpeed * tiltSpeedModifer);
+        }
+        else {
+            isMoving = false;
+        }
+
+        Vector3 targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
+        rb.AddForce(targetDirection * (speed * tiltSpeedModifer) * 10f, ForceMode.Force);
     }
 
     private void SpeedControl(){
@@ -102,15 +120,52 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     private void CameraRotation(){
-        if (!LeftClickInput() || (LeftClickInput() && RightClickInput())) {
+        bool cameraMoved = false;
+
+        if (!LeftClickInput()) {
             camYRotation += lookInput.x * rotationPower;
             camXRotation += lookInput.y * rotationPower;
             camXRotation = Mathf.Clamp(camXRotation, minXCamClamp, maxXCamClamp);
-
-            Quaternion rotation = Quaternion.Euler(camXRotation, camYRotation, 0);
-
-            followTarget.rotation = rotation;
         }
+        if (lookInput.magnitude > 0.01f) {
+            cameraMoved = true;
+            timeSinceLastCameraMovement = 0f;
+            resetCameraX = false;
+            resetCameraY = false;
+        }
+        if (!cameraMoved) {
+            timeSinceLastCameraMovement += Time.deltaTime;
+
+            if (timeSinceLastCameraMovement >= cameraResetDelay) {
+                resetCameraX = true;
+                resetCameraY = true;
+            }
+        }
+        if (isMoving) {
+            resetCameraX = true;
+        }
+        else if (LeftClickInput()) {
+            resetCameraY = true;
+            resetCameraX = true;
+        }
+        if (resetCameraX) {
+            Vector3 lerped = Vector3.Lerp(new Vector3(camXRotation, 0, 0), Vector3.zero, Time.deltaTime * cameraFollowSpeed * .5f);
+            camXRotation = lerped.x;
+        }
+        if (resetCameraY) {
+            Vector3 lerped = Vector3.Lerp(new Vector3(0, camYRotation, 0), new Vector3(0, transform.rotation.eulerAngles.y, 0), Time.deltaTime * cameraFollowSpeed);
+            camYRotation = lerped.y;
+        }
+
+        Quaternion rotation = Quaternion.Euler(camXRotation, camYRotation, 0);
+
+        followTarget.rotation = rotation;
+    }
+
+    private IEnumerator ResetHorizontalCameraRotation(){
+        yield return new WaitForSeconds(3);
+        Vector3 lerped = Vector3.Lerp(new Vector3(camXRotation, camYRotation, 0), Vector3.zero, Time.deltaTime * cameraFollowSpeed);
+        camXRotation = lerped.x;
     }
 
     private void MouseLookInput(){
@@ -120,7 +175,7 @@ public class PlayerMovement : MonoBehaviour{
     private bool LeftClickInput(){
         return playerInputs.CameraMovement.MouseLeftClick.ReadValue<float>() > 0;
     }
-    
+
     private bool RightClickInput(){
         return playerInputs.CameraMovement.MouseRightClick.ReadValue<float>() > 0;
     }
@@ -147,8 +202,10 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     private void LateUpdate(){
-        if (moveDirection == Vector3.zero) {
-            CameraRotation();
-        }
+        CameraRotation();
+    }
+
+    public void SetTiltSpeedModifier(float modifier){
+        tiltSpeedModifer = modifier;
     }
 }

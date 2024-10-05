@@ -7,7 +7,7 @@ public class UITiltControls : MonoBehaviour{
     [SerializeField] private GameObject staticTiltControlImage;
     [SerializeField] private GameObject mouseHoldTiltControlImage;
     [SerializeField] private Canvas canvas;
-    
+    [SerializeField] private float circleTiltRadius = 20;
     
     private GameObject staticImage;
     private GameObject movingImage;
@@ -63,8 +63,8 @@ public class UITiltControls : MonoBehaviour{
         
         float distanceFromCenter = dragPosition.magnitude;
         
-        if (distanceFromCenter > 200) {
-            dragPosition = dragPosition.normalized * 200; // Normalize and multiply by max radius
+        if (distanceFromCenter > circleTiltRadius) {
+            dragPosition = dragPosition.normalized * circleTiltRadius; // Normalize and multiply by max radius
         }
         
         rectTransform.anchoredPosition = clickPosition + dragPosition;
@@ -91,5 +91,9 @@ public class UITiltControls : MonoBehaviour{
     
     public float GetXDistance(){
         return xDistance;
+    }
+    
+    public float GetCircleTiltRadius(){
+        return circleTiltRadius;
     }
 }
