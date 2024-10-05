@@ -1,19 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour{
-    [Header("CameraMovement")] 
-    [SerializeField] private GameObject followTarget;
-    [SerializeField] private float rotationPower = 3f;
+    [Header("CameraMovement")] [SerializeField]
+    private Transform followTarget;
+    private int minXCamClamp = -70;
+    private int maxXCamClamp = 70;
+    [SerializeField] private float rotationPower = .3f;
+    [SerializeField] private GameObject mainCamera;
     
+
     [Header("Movement")] [SerializeField] private float moveSpeed;
     [SerializeField] private float groundDrag;
     [SerializeField] private float jumpHeight;
-    [SerializeField] private float rotationLerp;
 
     [Header("Ground Check")] [SerializeField]
     private float playerHeight;
@@ -29,9 +33,11 @@ public class PlayerMovement : MonoBehaviour{
     private Vector3 rotateDirection;
     private Rigidbody rb;
     private PlayerInputs playerInputs;
-    private Quaternion nextRotation;
-    private Vector3 nextPosition;
-    private Vector3 angles;
+    private Vector2 lookInput;
+    private float camYRotation;
+    private float camXRotation;
+    private float clickInput;
+    private float cameraFollowSpeed = 5f;
 
     private void Awake(){
         playerInputs = new PlayerInputs();
@@ -45,10 +51,6 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     private void Update(){
-        Vector2 cameraMovement = playerInputs.CameraMovement.Move.ReadValue<Vector2>();
-        VerticalCameraRotation(cameraMovement.x);
-        HorizontalCameraRotation(cameraMovement.y);
-        
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * .5f + .2f, whatIsGround);
         SpeedControl();
 
@@ -62,6 +64,8 @@ public class PlayerMovement : MonoBehaviour{
         if (playerInputs.Player.Jump.triggered) {
             Jump();
         }
+
+        MouseLookInput();
     }
 
     private void FixedUpdate(){
@@ -75,16 +79,17 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     private void Move(){
-        //this.transform.position += new Vector3(getMovementVectorNormalized().x, 0, getMovementVectorNormalized().y) * moveSpeed * Time.deltaTime;
         horizontalInput = GetMovementVectorNormalized().x;
         verticalInput = GetMovementVectorNormalized().y;
+        
         moveDirection = transform.forward * verticalInput;
-        //rotateDirection = transform.right * horizontalInput;
+        rotateDirection = transform.right * horizontalInput;
 
-        //const float rotateSpeed = 3f;
-        //transform.forward = Vector3.Slerp(transform.forward, rotateDirection.normalized, Time.deltaTime * rotateSpeed);
+        
+        const float rotateSpeed = 3f;
+        transform.forward = Vector3.Slerp(transform.forward, rotateDirection.normalized, Time.deltaTime * rotateSpeed);
 
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        rb.AddForce(moveDirection * moveSpeed * 10f, ForceMode.Force);
     }
 
     private void SpeedControl(){
@@ -95,63 +100,29 @@ public class PlayerMovement : MonoBehaviour{
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
+
+    private void CameraRotation(){
+        if (!LeftClickInput() || (LeftClickInput() && RightClickInput())) {
+            camYRotation += lookInput.x * rotationPower;
+            camXRotation += lookInput.y * rotationPower;
+            camXRotation = Mathf.Clamp(camXRotation, minXCamClamp, maxXCamClamp);
+
+            Quaternion rotation = Quaternion.Euler(camXRotation, camYRotation, 0);
+
+            followTarget.rotation = rotation;
+        }
+    }
+
+    private void MouseLookInput(){
+        lookInput = playerInputs.CameraMovement.Look.ReadValue<Vector2>();
+    }
+
+    private bool LeftClickInput(){
+        return playerInputs.CameraMovement.MouseLeftClick.ReadValue<float>() > 0;
+    }
     
-    private void VerticalCameraRotation(float y){
-        if (!Input.GetMouseButton(0)) {
-            followTarget.transform.rotation *= Quaternion.AngleAxis(y * rotationPower, Vector3.up);
-            ClampVerticalCameraRotation();
-        }
-        
-    }
-
-    private void HorizontalCameraRotation(float x){
-        if (!Input.GetMouseButton(0)) {
-            followTarget.transform.rotation *= Quaternion.AngleAxis(x * rotationPower, Vector3.right);
-        }
-    }
-    
-    private void ClampVerticalCameraRotation(){
-        angles = followTarget.transform.localEulerAngles;
-        angles.z = 0;
-
-        var angle = followTarget.transform.localEulerAngles.x;
-
-        //Clamp the Up/Down rotation
-        if (angle > 180 && angle < 340) {
-            angles.x = 340;
-        }
-        else if (angle < 180 && angle > 40) {
-            angles.x = 40;
-        }
-
-        followTarget.transform.localEulerAngles = angles;
-    }
-
-    private void RotatePlayer(){
-        nextRotation = Quaternion.Lerp(followTarget.transform.rotation, nextRotation, Time.deltaTime * rotationLerp);
-
-        if (horizontalInput == 0 && verticalInput == 0) 
-        {   
-            nextPosition = transform.position;
-
-            if (Input.GetMouseButton(0)) // DOESNT WORK
-            {
-                Debug.Log("Mouse button is pressed");
-                //Set the player rotation based on the look transform
-                transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
-                //reset the y rotation of the look transform
-                followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
-            }
-
-            return; 
-        }
-        
-
-        //Set the player rotation based on the look transform
-        var rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationLerp);
-        //reset the y rotation of the look transform
-        followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
+    private bool RightClickInput(){
+        return playerInputs.CameraMovement.MouseRightClick.ReadValue<float>() > 0;
     }
 
     private Vector2 GetMovementVectorNormalized(){
@@ -176,6 +147,8 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     private void LateUpdate(){
-        RotatePlayer();
+        if (moveDirection == Vector3.zero) {
+            CameraRotation();
+        }
     }
 }
