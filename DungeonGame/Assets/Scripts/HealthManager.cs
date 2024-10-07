@@ -33,7 +33,9 @@ public class HealthManager : MonoBehaviour{
         if (!isPlayerDead) {
             currentPlayerHealth--;
             Debug.Log("Health: " + currentPlayerHealth);
-            
+
+            SoundManager.instance.PlayDamageSound();
+
             OnDamageTaken?.Invoke();
         }
     }
@@ -42,6 +44,9 @@ public class HealthManager : MonoBehaviour{
         isPlayerDead = true;
         Debug.Log("Player is dead, Restarting to 3 lives - Change later so game restarts or whatever you want to do");
         yield return new WaitForSeconds(1); // Add a delay of 1 second
+
+        SoundManager.instance.PlayDeadSound();
+
         //InitPlayerHealth();
         OnDeath?.Invoke();
     }
