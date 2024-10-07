@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class UITiltControls : MonoBehaviour{
@@ -25,6 +26,7 @@ public class UITiltControls : MonoBehaviour{
         if (Input.GetMouseButtonDown(0))
         {
             SpawnImageAtClick();
+            Mouse.current.WarpCursorPosition(spawnPosition);
         }
 
         if (Input.GetMouseButton(0)) {
@@ -39,7 +41,7 @@ public class UITiltControls : MonoBehaviour{
     }
 
     private void SpawnImageAtClick(){
-        initialMousePosition = Input.mousePosition;
+        initialMousePosition = spawnPosition;
 
         if (staticImage == null) {
            staticImage = Instantiate(staticTiltControlImage, canvas.transform);
@@ -55,15 +57,6 @@ public class UITiltControls : MonoBehaviour{
         Vector2 currentMousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 distance = currentMousePosition - initialMousePosition;
         
-        if (Vector2.Distance(initialMousePosition, currentMousePosition) > circleTiltRadius) {
-            // Calculate direction from initialMousePosition to currentMousePosition
-            Vector2 direction = (currentMousePosition - initialMousePosition).normalized;
-
-            // Set initialMousePosition to a point `circleTiltRadius` away in the direction of currentMousePosition
-            initialMousePosition = initialMousePosition + direction * circleTiltRadius;
-            
-        }
-        
         Vector2 mousePosition = spawnPosition + distance;
 
         if (movingImage == null)
@@ -73,14 +66,13 @@ public class UITiltControls : MonoBehaviour{
 
         RectTransform rectTransform = movingImage.GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, mousePosition, canvas.worldCamera, out Vector2 localPoint);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, initialMousePosition, canvas.worldCamera, out Vector2 nothing); //Comment this out
         
         Vector2 dragPosition = localPoint - clickPosition;
         
         float distanceFromCenter = dragPosition.magnitude;
         
         if (distanceFromCenter > circleTiltRadius) {
-            dragPosition = dragPosition.normalized * circleTiltRadius; // Normalize and multiply by max radius
+            dragPosition = dragPosition.normalized * circleTiltRadius;
         }
         
         rectTransform.anchoredPosition = clickPosition + dragPosition;

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour{
     [SerializeField] private int baseHealth = 3;
@@ -49,6 +50,7 @@ public class HealthManager : MonoBehaviour{
 
         //InitPlayerHealth();
         OnDeath?.Invoke();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public int GetMaxHealth()
