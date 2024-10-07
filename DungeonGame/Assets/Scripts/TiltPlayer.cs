@@ -14,6 +14,7 @@ public class TiltPlayer : MonoBehaviour{
     private UITiltControls uiTiltControlsScript;
     private float yDistance = 0;
     private float xDistance = 0;
+    
 
     private void Awake(){
         playerInputs = new PlayerInputs();
@@ -33,16 +34,20 @@ public class TiltPlayer : MonoBehaviour{
         
         if (Input.GetMouseButton(0)) {
             Tilt();
+            playerMovement.SetTiltSpeedModifier(0.5f);
         }
         else {
+            playerMovement.SetTiltSpeedModifier(1);
             Quaternion targetRotation = player.transform.rotation;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * tiltSpeed);
         }
     }
 
     private void Tilt(){
-        float tiltAngleX = MapValue(yDistance, -200,200, -75, 75);
-        float tiltAngleZ = MapValue(xDistance, -200,200, -75, 75);
+        float min = uiTiltControlsScript.GetCircleTiltRadius() * -1;
+        float max = uiTiltControlsScript.GetCircleTiltRadius();
+        float tiltAngleX = MapValue(yDistance, min,max, -75, 75);
+        float tiltAngleZ = MapValue(xDistance, min,max, -75, 75);
 
         Quaternion targetRotation = Quaternion.Euler(tiltAngleX, 0, tiltAngleZ);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * tiltSpeed);
@@ -51,5 +56,9 @@ public class TiltPlayer : MonoBehaviour{
 
     private float MapValue(float value, float oldMin, float oldMax, float newMin, float newMax){
         return (newMax - newMin) * (value - oldMin) / (oldMax - oldMin) + newMin;
+    }
+    
+    private void OnDestroy(){
+        playerInputs.Disable();
     }
 }
