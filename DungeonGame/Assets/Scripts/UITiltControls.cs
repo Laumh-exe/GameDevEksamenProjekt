@@ -7,7 +7,7 @@ public class UITiltControls : MonoBehaviour{
     [SerializeField] private GameObject staticTiltControlImage;
     [SerializeField] private GameObject mouseHoldTiltControlImage;
     [SerializeField] private Canvas canvas;
-    [SerializeField] private float circleTiltRadius = 30;
+    [SerializeField] private float circleTiltRadius;
     
     private GameObject staticImage;
     private GameObject movingImage;
@@ -55,13 +55,14 @@ public class UITiltControls : MonoBehaviour{
         Vector2 currentMousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 distance = currentMousePosition - initialMousePosition;
         
-        /*if (Vector2.Distance(initialMousePosition, currentMousePosition) > circleTiltRadius) {
-            //InitialMousePosition should more 1 in direction of currentMousePosition so they are always circleTiltRadius apart
+        if (Vector2.Distance(initialMousePosition, currentMousePosition) > circleTiltRadius) {
+            // Calculate direction from initialMousePosition to currentMousePosition
             Vector2 direction = (currentMousePosition - initialMousePosition).normalized;
 
-            // Update the initialMousePosition to be circleTiltRadius away from currentMousePosition
-            initialMousePosition = currentMousePosition - direction * circleTiltRadius;
-        }*/
+            // Set initialMousePosition to a point `circleTiltRadius` away in the direction of currentMousePosition
+            initialMousePosition = initialMousePosition + direction * circleTiltRadius;
+            
+        }
         
         Vector2 mousePosition = spawnPosition + distance;
 
@@ -72,6 +73,7 @@ public class UITiltControls : MonoBehaviour{
 
         RectTransform rectTransform = movingImage.GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, mousePosition, canvas.worldCamera, out Vector2 localPoint);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, initialMousePosition, canvas.worldCamera, out Vector2 nothing); //Comment this out
         
         Vector2 dragPosition = localPoint - clickPosition;
         
