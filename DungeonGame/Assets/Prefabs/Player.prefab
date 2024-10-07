@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 7693482467998630306}
-  rotationPower: 0.1
+  rotationPower: 0.3
   mainCamera: {fileID: 0}
   moveSpeed: 7
   groundDrag: 5
