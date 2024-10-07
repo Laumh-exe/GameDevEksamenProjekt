@@ -12,6 +12,8 @@ public class Coin : MonoBehaviour
             // Find ScoreManager og tilf�j point
             FindFirstObjectByType<ScoreManager>().AddPoints(coinValue);
 
+            SoundManager.instance.PlayCoinCollectSound();
+
             // Fjern m�nten fra scenen
             Destroy(gameObject);
         }
