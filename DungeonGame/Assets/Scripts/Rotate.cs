@@ -1,12 +1,20 @@
 using UnityEngine;
 
-public class RotateObject : MonoBehaviour
+public class Rotate : MonoBehaviour
 {
-    
+    public RotateObject rotateObject;
+
     public Vector3 rotationSpeed = new Vector3(0, 100, 0);
+    
 
     void Update()
     {
-        transform.Rotate(rotationSpeed * Time.deltaTime);
+        // Hvis rotation er aktiv, udfør rotation
+        if (rotateObject.GetIsFloating())
+        {
+            transform.Rotate(rotationSpeed * Time.deltaTime);
+        }
     }
+
+  
 }

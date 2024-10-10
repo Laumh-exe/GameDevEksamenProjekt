@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 711132847924663868}
+  - component: {fileID: 2947690055849973100}
   m_Layer: 0
   m_Name: RotateObjeckt 1
   m_TagString: Untagged
@@ -32,6 +33,18 @@ Transform:
   - {fileID: 7332782615350867138}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2947690055849973100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219889884996279420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463cdccfb31015d43ba0f42dba68d349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8801810302811964562
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144d736ac5a0f2b48b24deadd0198dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateObject: {fileID: 2947690055849973100}
   rotationSpeed: {x: 0, y: 100, z: 0}
 --- !u!114 &4437763104480369669
 MonoBehaviour:
@@ -171,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48679be6976a675419049bc20d7f91fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateObject: {fileID: 2947690055849973100}
   amplitude: 0.5
   frequency: 2
 --- !u!1001 &7292822585920378552
