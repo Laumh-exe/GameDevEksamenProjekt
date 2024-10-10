@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthVisual : MonoBehaviour
-{
-    [SerializeField] private GameObject gameManager;
+public class HealthVisual : MonoBehaviour{
     private int currentHealth;
     private int numOfHearts;
 
@@ -15,37 +13,29 @@ public class HealthVisual : MonoBehaviour
     public Sprite emptyHeart;
     private HealthManager healthManager;
 
-    private void Start()
-    {
-        healthManager = gameManager.GetComponent<HealthManager>();
+    private void Start(){
+        healthManager = HealthManager.Instance;
         numOfHearts = healthManager.GetMaxHealth();
-
     }
 
-    void Update()
-    {
+    void Update(){
         currentHealth = healthManager.GetCurrentHealth();
-        
-        // Ensure health doesn't exceed the number of hearts
-        if (currentHealth > numOfHearts)
-        {
+
+
+        if (currentHealth > numOfHearts) {
             currentHealth = numOfHearts;
         }
 
-        // Update heart display
-        for (int i = 0; i < hearts.Length; i++)
-        {
-            //Debug.Log("Current Health: " + currentHealth + ", Number of Hearts: " + numOfHearts + ", i: " + i + ", Hearts Length: " + hearts.Length + ", Hearts[i]: " + hearts[i]);
-            if (i < currentHealth)
-            {
+
+        for (int i = 0; i < hearts.Length; i++) {
+            if (i < currentHealth) {
                 hearts[i].sprite = fullHeart;
             }
-            else
-            {
+            else {
                 hearts[i].sprite = emptyHeart;
             }
 
-            // Toggle heart visibility based on the number of hearts
+
             hearts[i].enabled = i < numOfHearts;
         }
     }

@@ -9,8 +9,7 @@ public class Rotate : MonoBehaviour
 
     void Update()
     {
-        // Hvis rotation er aktiv, udfør rotation
-        if (rotateObject.GetIsFloating())
+        if (!rotateObject.GetIsFloating())
         {
             transform.Rotate(rotationSpeed * Time.deltaTime);
         }

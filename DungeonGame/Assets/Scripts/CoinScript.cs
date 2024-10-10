@@ -1,21 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Coin : MonoBehaviour
-{
-    public int coinValue = 1; // Antallet af point, m�nten giver
+public class Coin : MonoBehaviour{
+    [SerializeField] private int coinValue = 1;
+    bool isCollected = false;
 
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.gameObject.name);
-        if (other.gameObject.CompareTag("Player")) // S�rg for at spilleren har taggen "Player"
-        {
-            // Find ScoreManager og tilf�j point
-            FindFirstObjectByType<ScoreManager>().AddPoints(coinValue);
-
-            SoundManager.instance.PlayCoinCollectSound();
-
-            // Fjern m�nten fra scenen
+    void OnTriggerEnter(Collider other){
+        if (other.gameObject.CompareTag("Player") && !isCollected) {
+            isCollected = true;
             Destroy(gameObject);
+            ScoreManager.Instance.AddPoints(coinValue);
+            SoundManager.Instance.PlayCoinCollectSound();
         }
     }
 }

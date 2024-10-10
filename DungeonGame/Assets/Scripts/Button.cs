@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Button : MonoBehaviour{
-    [SerializeField] private AButtonControlled[] buttonControlledObjects;
+    //[SerializeField] private AButtonControlled[] buttonControlledObjects;
+    [SerializeField] private List<AButtonControlled> buttonControlledObjects;
     [SerializeField] private GameObject buttonObject;
     [SerializeField] private GameObject buttonPressedVisual;
 
@@ -16,7 +17,7 @@ public class Button : MonoBehaviour{
     private void OnTriggerEnter(Collider other){
         if (!isPressed) {
             buttonPressedVisual.SetActive(true);
-            SoundManager.instance.PlayButtonPressedSound();
+            SoundManager.Instance.PlayButtonPressedSound();
             foreach (AButtonControlled btncontrolled in buttonControlledObjects) {
                 btncontrolled.ButtonPressed();
             }

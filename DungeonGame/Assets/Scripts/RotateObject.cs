@@ -1,16 +1,15 @@
 using System;
 using UnityEngine;
 
-public class RotateObject : MonoBehaviour
+public class RotateObject : AButtonControlled
 {
     private bool isFloating = false;
-    public void ButtonPressed()
+    public override void ButtonPressed()
     {
         isFloating = !isFloating;
     }
-
-    // Kaldt når knappen slippes (kan være tom)
-    public void ButtonReleased()
+    
+    public override void ButtonReleased()
     {
     }
     public bool GetIsFloating()

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6422625095366538991}
   m_Layer: 8
   m_Name: EyeFrame
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 4621572108760157532}
   m_Layer: 8
   m_Name: eyeR
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 5648014978581236489}
   m_Layer: 8
   m_Name: Cylinder (3)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 5720135804065037119}
   m_Layer: 8
   m_Name: EyeFrame
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 5558869060845166808}
   m_Layer: 8
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -679,7 +679,7 @@ GameObject:
   - component: {fileID: 1208775432616542389}
   m_Layer: 8
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -786,7 +786,6 @@ GameObject:
   - component: {fileID: 8781614268826803502}
   - component: {fileID: 4505535595726193274}
   - component: {fileID: 5696286239878899653}
-  - component: {fileID: 2586212671712703532}
   - component: {fileID: 6779581086705348188}
   m_Layer: 8
   m_Name: Model
@@ -850,19 +849,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2586212671712703532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2154012469498567686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f7f0b890871e9741b30376c11f48e6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
 --- !u!114 &6779581086705348188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,7 +862,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDamaged: {fileID: 3229518161136786421}
-  gameManager: {fileID: 0}
   colorOnTime: 0.5
 --- !u!1 &3113869540777768410
 GameObject:
@@ -892,7 +877,7 @@ GameObject:
   - component: {fileID: 2256803187879590407}
   m_Layer: 8
   m_Name: Cylinder (2)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1002,7 +987,7 @@ GameObject:
   - component: {fileID: 8128394681615902611}
   m_Layer: 8
   m_Name: PlayerDamaged
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1017,7 +1002,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0176775, y: 1.0176775, z: 1.0176775}
+  m_LocalScale: {x: 1.001, y: 1.001, z: 1.001}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3570532502422074041}
@@ -1114,7 +1099,7 @@ GameObject:
   - component: {fileID: 2437700142949259266}
   m_Layer: 8
   m_Name: Cylinder (3)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1221,7 +1206,7 @@ GameObject:
   - component: {fileID: 3604588639951615183}
   m_Layer: 8
   m_Name: Eyes
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1258,7 +1243,7 @@ GameObject:
   - component: {fileID: 8263355984520183496}
   m_Layer: 8
   m_Name: Cylinder (2)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1368,7 +1353,7 @@ GameObject:
   - component: {fileID: 4853824749400882424}
   m_Layer: 8
   m_Name: Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1478,7 +1463,7 @@ GameObject:
   - component: {fileID: 2451500343655317555}
   m_Layer: 8
   m_Name: eyeL
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1588,7 +1573,7 @@ GameObject:
   - component: {fileID: 1909206903253826380}
   m_Layer: 8
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1698,7 +1683,7 @@ GameObject:
   - component: {fileID: 2945813006681452340}
   m_Layer: 8
   m_Name: eyeL
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1805,7 +1790,7 @@ GameObject:
   - component: {fileID: 7693482467998630306}
   m_Layer: 8
   m_Name: Followtarget
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1839,7 +1824,7 @@ GameObject:
   - component: {fileID: 762834804058364837}
   m_Layer: 8
   m_Name: eyeR
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1946,7 +1931,7 @@ GameObject:
   - component: {fileID: 5687605947562469348}
   m_Layer: 8
   m_Name: Boosters
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2016,7 +2001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a240d89cc3c49b6b690418b3f437c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
 --- !u!1 &8395797349209614788
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,7 +2012,7 @@ GameObject:
   - component: {fileID: 995923991714192104}
   m_Layer: 8
   m_Name: Eyes
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2062,7 +2046,7 @@ GameObject:
   - component: {fileID: 3570532502422074041}
   m_Layer: 8
   m_Name: Boosters
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2100,7 +2084,7 @@ GameObject:
   - component: {fileID: 6463938724958489682}
   m_Layer: 8
   m_Name: Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2208,7 +2192,7 @@ GameObject:
   - component: {fileID: 3337048494009614316}
   m_Layer: 8
   m_Name: UITiltControls
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2267,6 +2251,10 @@ PrefabInstance:
     - target: {fileID: 4643789200490535277, guid: b9e04d1bd8f08d642a8d3721042a1a5a, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643789200490535277, guid: b9e04d1bd8f08d642a8d3721042a1a5a, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4801264989739456463, guid: b9e04d1bd8f08d642a8d3721042a1a5a, type: 3}
       propertyPath: m_Layer

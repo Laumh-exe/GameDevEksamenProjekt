@@ -18,8 +18,7 @@ public class UpAndDownMovement : MonoBehaviour
 
     void Update()
     {
-        // Hvis bevægelsen er aktiv, udfør op/ned bevægelse
-        if (rotateObject.GetIsFloating())
+        if (!rotateObject.GetIsFloating())
         {
             Vector3 newPos = startPos;
             newPos.y += Mathf.Sin(Time.time * frequency) * amplitude;

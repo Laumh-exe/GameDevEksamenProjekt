@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerDamageVisual : MonoBehaviour
 {
     [SerializeField] private GameObject playerDamaged;
-    [SerializeField] private GameObject gameManager;
     [SerializeField] private float colorOnTime = .5f;
 
     private bool isTimerRunning = false;
@@ -14,8 +13,7 @@ public class PlayerDamageVisual : MonoBehaviour
     private void Start()
     {
         timeRemaining = colorOnTime;
-        HealthManager healthManager = gameManager.GetComponent<HealthManager>();
-        healthManager.OnDamageTaken += HandleDamageTaken;
+        HealthManager.Instance.OnDamageTaken += HandleDamageTaken;
     }
 
     private void HandleDamageTaken()
@@ -45,5 +43,10 @@ public class PlayerDamageVisual : MonoBehaviour
                 isTimerRunning = false;
             }
         }
+    }
+    
+    private void OnDestroy()
+    {
+        HealthManager.Instance.OnDamageTaken -= HandleDamageTaken;
     }
 }

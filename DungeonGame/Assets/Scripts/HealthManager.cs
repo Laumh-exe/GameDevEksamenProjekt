@@ -5,15 +5,22 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour{
-    [SerializeField] private int baseHealth = 3;
+    [SerializeField] private int baseHealth;
+    public static HealthManager Instance;
     private int currentPlayerHealth;
     private bool isPlayerDead;
 
     public Action OnDamageTaken;
     public Action OnDeath;
-
-    private void Start()
-    {
+    
+    void Awake(){
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else {
+            Destroy(gameObject);
+        }
         currentPlayerHealth = baseHealth;
         InitPlayerHealth();
     }
@@ -27,15 +34,13 @@ public class HealthManager : MonoBehaviour{
     private void InitPlayerHealth(){
         currentPlayerHealth = baseHealth;
         isPlayerDead = false;
-        Debug.Log("Health: " + currentPlayerHealth);
     }
 
     public void TakeDamage(){
         if (!isPlayerDead) {
             currentPlayerHealth--;
-            Debug.Log("Health: " + currentPlayerHealth);
 
-            SoundManager.instance.PlayDamageSound();
+            SoundManager.Instance.PlayDamageSound();
 
             OnDamageTaken?.Invoke();
         }
@@ -43,14 +48,16 @@ public class HealthManager : MonoBehaviour{
 
     private IEnumerator KillPlayer(){
         isPlayerDead = true;
-        Debug.Log("Player is dead, Restarting to 3 lives - Change later so game restarts or whatever you want to do");
-        yield return new WaitForSeconds(1); // Add a delay of 1 second
+        yield return new WaitForSeconds(1);
 
-        SoundManager.instance.PlayDeadSound();
+        SoundManager.Instance.PlayDeadSound();
 
-        //InitPlayerHealth();
         OnDeath?.Invoke();
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    
+        yield return null; 
+        InitPlayerHealth();
     }
 
     public int GetMaxHealth()

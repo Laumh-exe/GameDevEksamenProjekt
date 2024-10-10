@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 304760abbb25e43c19d8c32829655866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseHealth: 0
 --- !u!114 &6431798336266654312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,7 +55,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7142251843061354317}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b717f35c66812264aa1f3cc6d6bb7890, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f9334bd36cd0db41bb39860c2593017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0

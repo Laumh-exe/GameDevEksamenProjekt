@@ -422,6 +422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8380720233346904718}
   - component: {fileID: 5418577062869816919}
+  - component: {fileID: 2160060663005467922}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -457,7 +458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71da258b356d1245a1a228afa81cf78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   hearts:
   - {fileID: 2191253042425688108}
   - {fileID: 5787290543363693182}
@@ -471,6 +471,19 @@ MonoBehaviour:
   - {fileID: 2141413830435727789}
   fullHeart: {fileID: 21300000, guid: c51e549bc97814d4e962b0cb7ef0afd4, type: 3}
   emptyHeart: {fileID: 21300000, guid: 9ca8180503b87214e8b61beb2186e1c6, type: 3}
+--- !u!114 &2160060663005467922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4605025946611274322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c5d8e65a4636548ab9ed09601c4cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 6302249677575721306}
 --- !u!1 &5192826157144619238
 GameObject:
   m_ObjectHideFlags: 0

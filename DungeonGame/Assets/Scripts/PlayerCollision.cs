@@ -3,12 +3,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
-    [SerializeField] private GameObject gameManager;
-    
     private HealthManager healthManager;
 
     private void Start(){
-        healthManager = gameManager.GetComponent<HealthManager>();
+        healthManager = HealthManager.Instance;
     }
 
     private void OnTriggerEnter(Collider other){

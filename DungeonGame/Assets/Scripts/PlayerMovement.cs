@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour{
         if (grounded) {
             rb.AddForce(playerModel.transform.up * jumpHeight, ForceMode.Impulse);
 
-            SoundManager.instance.PlayJumpSound();
+            SoundManager.Instance.PlayJumpSound();
         }
     }
 

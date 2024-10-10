@@ -11,21 +11,18 @@ public class Laser : MonoBehaviour{
     [SerializeField] private float laserDistance = 50f;
     [SerializeField] private LayerMask ignoreMask;
     [SerializeField] private bool showLine = true;
-    [SerializeField] private GameObject gameManager;
-
-    [FormerlySerializedAs("damageCooldowntimerSeconds")] [SerializeField]
-    private int damageCooldownTimerSeconds = 3;
+    private HealthManager healthManager;
+    [SerializeField] private float damageCooldownTimerSeconds;
 
     private RaycastHit rayHit;
     private Ray ray;
-    private HealthManager healthManager;
     private float timeRemaining;
     private bool isTimerRunning;
     private bool playerTakeDamage;
     private bool isLaserOn = true;
 
     private void Start(){
-        healthManager = gameManager.GetComponent<HealthManager>();
+        healthManager = HealthManager.Instance;
         playerTakeDamage = true;
         isTimerRunning = false;
         timeRemaining = damageCooldownTimerSeconds;
@@ -145,5 +142,9 @@ public class Laser : MonoBehaviour{
 
     public void SetLaserOn(bool value){
         isLaserOn = value;
+    }
+
+    private void OnDestroy(){
+        ResetRayHit();
     }
 }
