@@ -51,10 +51,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   showLine: 1
-  OnHitTarget:
-    m_PersistentCalls:
-      m_Calls: []
   gameManager: {fileID: 6024730255285974409, guid: 0cc67468e7daa564fa48ef04026b2e2f, type: 3}
+  damageCooldowntimerSeconds: 3
 --- !u!120 &1378298231030290276
 LineRenderer:
   serializedVersion: 2
@@ -171,6 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7806946061907682898}
+  - component: {fileID: 6115668897477206200}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -195,6 +194,19 @@ Transform:
   - {fileID: 5453771711477393759}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6115668897477206200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889914701748169403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09703a26a485ba5438958502288cf7a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laser: {fileID: 3523076781205987903}
 --- !u!1 &5809694688970419722
 GameObject:
   m_ObjectHideFlags: 0

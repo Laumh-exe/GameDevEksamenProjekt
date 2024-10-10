@@ -4,103 +4,102 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
-public class Laser : MonoBehaviour
-{
+public class Laser : MonoBehaviour{
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float laserDistance = 50f;
     [SerializeField] private LayerMask ignoreMask;
     [SerializeField] private bool showLine = true;
     [SerializeField] private GameObject gameManager;
-    [SerializeField] private int damageCooldowntimerSeconds = 3;
 
-    private Transform mirror;
+    [FormerlySerializedAs("damageCooldowntimerSeconds")] [SerializeField]
+    private int damageCooldownTimerSeconds = 3;
+
     private RaycastHit rayHit;
     private Ray ray;
     private HealthManager healthManager;
     private float timeRemaining;
     private bool isTimerRunning;
     private bool playerTakeDamage;
+    private bool isLaserOn = true;
 
-    private void Start()
-    {
+    private void Start(){
         healthManager = gameManager.GetComponent<HealthManager>();
         playerTakeDamage = true;
         isTimerRunning = false;
-        timeRemaining = damageCooldowntimerSeconds;
+        timeRemaining = damageCooldownTimerSeconds;
     }
 
-    private void Update()
-    {
-        DrawLaser(transform.position, transform.forward);
-        CountdownTimer();
-        if (rayHit.collider != null)
-        {
-            CheckForPlayer();
+    private void Update(){
+        if (isLaserOn) {
+            DrawLaser(transform.position, transform.forward);
+            CountdownTimer();
+            if (rayHit.collider != null) {
+                CheckForPlayer();
+            }
+        }
+        else {
+            lineRenderer.positionCount = 0;
         }
     }
 
-    private void DrawLaser(Vector3 position, Vector3 direction)
-    {
+    private void DrawLaser(Vector3 position, Vector3 direction){
         ray = new Ray(position, direction);
 
-        if (Physics.Raycast(ray, out rayHit, laserDistance))
-        {
+        if (Physics.Raycast(ray, out rayHit, laserDistance)) {
             lineRenderer.positionCount = 2;
-
             lineRenderer.SetPosition(0, position);
             lineRenderer.SetPosition(1, rayHit.point);
 
-            if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("whatIsMirror"))
-            {
-                Vector3 reflectedDirection = Vector3.Reflect(direction, rayHit.normal);
-                ReflectLaser(rayHit.point, reflectedDirection); // Reflect from the hit point
-            }
-
+            HandleRayHit(direction);
         }
-        else
-        {
-            rayHit = new RaycastHit();
-            
-            // If no hit, just draw the laser forward
-            lineRenderer.SetPosition(0, position);
-            lineRenderer.SetPosition(1, position + direction * laserDistance);
+        else {
+            ResetRayHit();
+            DrawLaserForward(position, direction);
         }
     }
 
-    private void ReflectLaser(Vector3 startPosition, Vector3 reflectedDirection)
-    {
+    private void HandleRayHit(Vector3 direction){
+        if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("WhatIsMirror")) {
+            ReflectLaser(rayHit.point, Vector3.Reflect(direction, rayHit.normal));
+        }
+        else if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("WhatIsIceCube")) {
+            rayHit.collider.gameObject.GetComponent<IceCube>().Melt();
+        }
+    }
+
+    private void ReflectLaser(Vector3 startPosition, Vector3 reflectedDirection){
         Ray reflectedRay = new Ray(startPosition, reflectedDirection);
 
-        if (Physics.Raycast(reflectedRay, out RaycastHit hit, laserDistance))
-        {
+        if (Physics.Raycast(reflectedRay, out RaycastHit hit, laserDistance)) {
             rayHit = hit;
-            lineRenderer.positionCount += 1; // Add another point to the line for the reflection
-
-            // Add reflected point
+            lineRenderer.positionCount += 1;
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, rayHit.point);
 
-            // If the new hit is another mirror, keep reflecting
-            if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("whatIsMirror"))
-            {
-                Vector3 newReflectedDirection = Vector3.Reflect(reflectedDirection, rayHit.normal);
-                ReflectLaser(rayHit.point, newReflectedDirection);
-            }
+            HandleRayHit(reflectedDirection);
         }
-        else
-        {
-            // If no further hit, extend the laser in the reflected direction
-            lineRenderer.positionCount += 1;
-            lineRenderer.SetPosition(lineRenderer.positionCount - 1,
-                startPosition + reflectedDirection * laserDistance);
+        else {
+            ExtendLaser(startPosition, reflectedDirection);
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        //Gizmos.DrawCube(transform.position, Vector3.one * 0.1f);
-        if (showLine)
-        {
+    private void ExtendLaser(Vector3 startPosition, Vector3 direction){
+        lineRenderer.positionCount += 1;
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, startPosition + direction * laserDistance);
+    }
+
+    private void DrawLaserForward(Vector3 position, Vector3 direction){
+        lineRenderer.SetPosition(0, position);
+        lineRenderer.SetPosition(1, position + direction * laserDistance);
+    }
+
+    private void ResetRayHit(){
+        rayHit = new RaycastHit();
+    }
+
+    private void OnDrawGizmos(){
+        if (showLine) {
             Gizmos.color = Color.red;
             Gizmos.DrawRay(transform.position, transform.forward * laserDistance);
 
@@ -109,40 +108,42 @@ public class Laser : MonoBehaviour
         }
     }
 
-    private void CountdownTimer()
-    {
-        if (isTimerRunning)
-        {
-            if (timeRemaining >= 0)
-            {
+    private void CountdownTimer(){
+        if (isTimerRunning) {
+            if (timeRemaining >= 0) {
                 timeRemaining -= Time.deltaTime;
             }
-            else
-            {
-                isTimerRunning = false;
-                playerTakeDamage = true;
+            else {
+                ResetDamageTimer();
             }
         }
     }
 
-    private void CheckForPlayer()
-    {
-        if (rayHit.collider.gameObject.CompareTag("Player"))
-        {
-            if (playerTakeDamage)
-            {
+    private void CheckForPlayer(){
+        if (rayHit.collider.gameObject.CompareTag("Player")) {
+            if (playerTakeDamage) {
                 healthManager.TakeDamage();
-                timeRemaining = damageCooldowntimerSeconds;
-                isTimerRunning = true;
-                playerTakeDamage = false;
+                StartDamageCooldown();
             }
         }
-        else
-        {
-            //Reset health timer
-            timeRemaining = damageCooldowntimerSeconds;
-            playerTakeDamage = true;
-            isTimerRunning = false;
+        else {
+            ResetDamageTimer();
         }
+    }
+
+    private void StartDamageCooldown(){
+        timeRemaining = damageCooldownTimerSeconds;
+        isTimerRunning = true;
+        playerTakeDamage = false;
+    }
+
+    private void ResetDamageTimer(){
+        timeRemaining = damageCooldownTimerSeconds;
+        playerTakeDamage = true;
+        isTimerRunning = false;
+    }
+
+    public void SetLaserOn(bool value){
+        isLaserOn = value;
     }
 }

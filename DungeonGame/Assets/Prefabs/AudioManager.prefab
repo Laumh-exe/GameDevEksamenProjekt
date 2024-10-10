@@ -147,3 +147,4 @@ MonoBehaviour:
   coinCollectSound: {fileID: 8300000, guid: 1cbb1aeab08f71a4e8a0b610b4a208bb, type: 3}
   deadSound: {fileID: 8300000, guid: 7b6d9da9125091041ab6e72b4ae9417e, type: 3}
   jumpSound: {fileID: 8300000, guid: fed90940666535244b7136876f8fe58f, type: 3}
+  buttonPressedSound: {fileID: 8300000, guid: 7462b170f34de9c40b53ffc432605c56, type: 3}

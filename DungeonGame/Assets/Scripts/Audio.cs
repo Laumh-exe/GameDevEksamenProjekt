@@ -10,11 +10,13 @@ public class SoundManager : MonoBehaviour
     public AudioClip coinCollectSound;
     public AudioClip deadSound;
     public AudioClip jumpSound;
-    // Tilføj flere lyde her efter behov
+    public AudioClip buttonPressedSound;
+    public AudioClip buttonReleasedSound;
+    // Tilfï¿½j flere lyde her efter behov
 
     void Awake()
     {
-        // Singleton mønster for at sikre, at der kun er én instans af SoundManager
+        // Singleton mï¿½nster for at sikre, at der kun er ï¿½n instans af SoundManager
         if (instance == null)
         {
             instance = this;
@@ -37,7 +39,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // Du kan også lave specifikke funktioner for hver lyd, hvis du ønsker
+    // Du kan ogsï¿½ lave specifikke funktioner for hver lyd, hvis du ï¿½nsker
     public void PlayDamageSound()
     {
         PlaySound(damageSound);
@@ -56,6 +58,16 @@ public class SoundManager : MonoBehaviour
     public void PlayJumpSound()
     {
         PlaySound(jumpSound);
+    }
+    
+    public void PlayButtonPressedSound()
+    {
+        PlaySound(buttonPressedSound);
+    }
+    
+    public void PlayButtonReleasedSound()
+    {
+        PlaySound(buttonReleasedSound);
     }
 
 }
