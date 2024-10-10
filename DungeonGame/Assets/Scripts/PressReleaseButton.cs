@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour{
-    //[SerializeField] private AButtonControlled[] buttonControlledObjects;
+public class PressReleaseButton : MonoBehaviour{
     [SerializeField] private List<AButtonControlled> buttonControlledObjects;
     [SerializeField] private GameObject buttonObject;
     [SerializeField] private GameObject buttonPressedVisual;

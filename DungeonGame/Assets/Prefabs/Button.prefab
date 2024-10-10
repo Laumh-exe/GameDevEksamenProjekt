@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 5520644899451090247}
   - component: {fileID: 4191158148625259135}
   - component: {fileID: 4673448828306495779}
-  - component: {fileID: 3643901465006182428}
+  - component: {fileID: 6663578110018470629}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -240,7 +240,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &3643901465006182428
+--- !u!114 &6663578110018470629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,13 +249,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3015164835984595117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3ac90a2481a8e34497842dc02668415, type: 3}
+  m_Script: {fileID: 11500000, guid: 60277bfa04c0a154f957f5bccb085f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonControlledObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  buttonControlledObjects: []
   buttonObject: {fileID: 4778625287465604406}
   buttonPressedVisual: {fileID: 8450274576402272013}
 --- !u!1 &4778625287465604406
@@ -380,7 +377,6 @@ GameObject:
   - component: {fileID: 3586330869664619429}
   - component: {fileID: 7188925030522034920}
   - component: {fileID: 1248672980046717257}
-  - component: {fileID: 7665012871891199585}
   m_Layer: 0
   m_Name: ButtonPressedVisual
   m_TagString: Untagged
@@ -458,24 +454,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7665012871891199585
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8450274576402272013}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.7495533, y: 0.3714276, z: 1.7495533}
-  m_Center: {x: 0, y: 0.1857138, z: 0}
