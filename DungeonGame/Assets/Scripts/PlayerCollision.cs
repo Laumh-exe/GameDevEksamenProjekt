@@ -1,7 +1,6 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
-
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private GameObject gameManager;
