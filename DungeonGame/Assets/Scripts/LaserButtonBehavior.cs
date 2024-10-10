@@ -1,11 +1,17 @@
+using System;
 using UnityEngine;
 
 public class LaserButtonBehavior : AButtonControlled
 {
     [SerializeField] private GameObject laser;
-    bool isOn = false;
+    [SerializeField] private bool isOff;
+
+    private void Start(){
+        laser.SetActive(!isOff);
+    }
+
     public override void ButtonPressed(){
-        laser.SetActive(isOn);
-        isOn = !isOn;
+        isOff = !isOff;
+        laser.SetActive(isOff);
     }
 }

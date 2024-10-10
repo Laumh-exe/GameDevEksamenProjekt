@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 174277463997878921}
-  - component: {fileID: 7955450273031522060}
+  - component: {fileID: 1723219368264353381}
+  - component: {fileID: 9106072409811345036}
   m_Layer: 0
   m_Name: ScoreManager
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   - {fileID: 3137249821193522701}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7955450273031522060
+--- !u!114 &1723219368264353381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,11 +43,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399512761301049479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b717f35c66812264aa1f3cc6d6bb7890, type: 3}
+  m_Script: {fileID: 11500000, guid: 304760abbb25e43c19d8c32829655866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  scoreText: {fileID: 4574528010982122465}
+  baseHealth: 0
+--- !u!114 &9106072409811345036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399512761301049479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9334bd36cd0db41bb39860c2593017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 5
 --- !u!1 &7979553660677986578
 GameObject:
   m_ObjectHideFlags: 0

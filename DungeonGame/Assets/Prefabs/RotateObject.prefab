@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 711132847924663868}
   - component: {fileID: 2947690055849973100}
   m_Layer: 0
-  m_Name: RotateObjeckt 1
+  m_Name: RotateObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

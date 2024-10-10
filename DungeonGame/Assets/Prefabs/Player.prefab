@@ -301,7 +301,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   moveSpeed: 7
   groundDrag: 5
-  jumpHeight: 5
+  jumpHeight: 8
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
