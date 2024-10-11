@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DamageObject
   - Wall
+  - CameraZone
   layers:
   - Default
   - TransparentFX

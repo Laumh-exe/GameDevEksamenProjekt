@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IceCube : MonoBehaviour
 {
-    private float meltSpeed = 1f;
+    private float meltSpeed = .5f;
     
     private void Update(){
         if(transform.localScale.y < 0.3){
