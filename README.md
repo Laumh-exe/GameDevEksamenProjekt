@@ -10,8 +10,6 @@ Level 1 inkluderer alt funktionalitet som skal femvises, med flere bud på udfod
 
 
 
-
-================================================================================================================================================
 ## TODO (Mål er efterhånden ændret)
 
 1. Lasers (obstacles.
