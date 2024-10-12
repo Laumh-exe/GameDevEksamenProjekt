@@ -1,3 +1,15 @@
+Til eksamen:
+SE LEVEL1
+Level 1 inkluderer alt funktionalitet som skal femvises, med flere bud på udfodringer der udnytter lasere, spejle og bevægelse for at undgå at mise alt liv og til sidst nå bag isblokken(Her skal der være en portal der fører til et nyt level).
+Controls:
+MOVE: WASD/Arrow
+CAM: Mouse
+Tilting: Left Mouse button
+
+
+
+
+================================================================================================================================================
 [Group 1 READme](#group-1-readme)
 ## TO DO:
 1. Lasers (obstacles.
