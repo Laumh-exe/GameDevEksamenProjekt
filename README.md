@@ -12,9 +12,8 @@ Level 1 inkluderer alt funktionalitet som skal femvises, med flere bud på udfod
 
 
 ================================================================================================================================================
-## Noter til udførelse af opgave(Løbende ændret)
-[Group 1 READme](#group-1-readme)
-## TO DO:
+## Noter til udførelse af opgave(Løbende ændret) ## TO DO:
+
 1. Lasers (obstacles.
 2. Health management.
 3. Dungeon rooms scaled (needs to feel properly sized and focused).
