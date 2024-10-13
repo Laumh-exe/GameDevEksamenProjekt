@@ -15,10 +15,14 @@ public class UITiltControls : MonoBehaviour{
     private Vector2 clickPosition;
     private Vector2 dragPosition;
     private Vector2 initialMousePosition;
-    private Vector2 spawnPosition = new Vector2(Screen.width / 2, Screen.height / 8);
+    private Vector2 spawnPosition;
 
     private float yDistance = 0;
     private float xDistance = 0;
+    
+    void Start(){
+        spawnPosition =  new Vector2(Screen.width / 2, Screen.height / 8);;
+    }
 
     void Update()
     {

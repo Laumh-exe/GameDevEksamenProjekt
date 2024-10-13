@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class Laser : MonoBehaviour{
     [SerializeField] private LineRenderer lineRenderer;
-    [SerializeField] private float laserDistance = 50f;
+    [SerializeField] private float laserDistance = 500f;
     [SerializeField] private LayerMask ignoreMask;
     [SerializeField] private bool showLine = true;
     private HealthManager healthManager;
