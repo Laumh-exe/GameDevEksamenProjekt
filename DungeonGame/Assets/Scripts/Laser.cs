@@ -20,6 +20,7 @@ public class Laser : MonoBehaviour{
     private bool isTimerRunning;
     private bool playerTakeDamage;
     private bool isLaserOn = true;
+    private float maxPoints = 100f;
 
     private void Start(){
         healthManager = HealthManager.Instance;
@@ -59,6 +60,7 @@ public class Laser : MonoBehaviour{
 
     private void HandleRayHit(Vector3 direction){
         if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("WhatIsMirror")) {
+            Debug.Log("Mirror hit: " + rayHit.collider.gameObject.name);
             ReflectLaser(rayHit.point, Vector3.Reflect(direction, rayHit.normal));
         }
         else if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("WhatIsIceCube")) {
@@ -67,16 +69,22 @@ public class Laser : MonoBehaviour{
     }
 
     private void ReflectLaser(Vector3 startPosition, Vector3 reflectedDirection){
-        Ray reflectedRay = new Ray(startPosition, reflectedDirection);
+        if (lineRenderer.positionCount < maxPoints) {
+            Ray reflectedRay = new Ray(startPosition, reflectedDirection);
 
-        if (Physics.Raycast(reflectedRay, out RaycastHit hit, laserDistance)) {
-            rayHit = hit;
-            lineRenderer.positionCount += 1;
-            lineRenderer.SetPosition(lineRenderer.positionCount - 1, rayHit.point);
+            if (Physics.Raycast(reflectedRay, out RaycastHit hit, laserDistance)) {
+                rayHit = hit;
+                lineRenderer.positionCount += 1;
+                lineRenderer.SetPosition(lineRenderer.positionCount - 1, rayHit.point);
 
-            HandleRayHit(reflectedDirection);
+                HandleRayHit(reflectedDirection); // Continue reflection logic if allowed
+            }
+            else {
+                ExtendLaser(startPosition, reflectedDirection); // No reflection, extend laser
+            }
         }
         else {
+            // If the reflection limit is reached, just extend the laser forward
             ExtendLaser(startPosition, reflectedDirection);
         }
     }

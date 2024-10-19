@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RotateObject : AButtonControlled
 {
-    private bool isFloating = false;
+    [SerializeField] private bool isFloating;
     public override void ButtonPressed()
     {
         isFloating = !isFloating;
@@ -11,7 +11,9 @@ public class RotateObject : AButtonControlled
     
     public override void ButtonReleased()
     {
+        isFloating = !isFloating;
     }
+    
     public bool GetIsFloating()
         { return isFloating; }
 
