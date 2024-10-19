@@ -16,14 +16,14 @@ MonoBehaviour:
   - From: Third Person Camera
     To: cam1
     Blend:
-      Style: 2
+      Style: 7
       Time: 2
       CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
-        m_RotationOrder: 0
+        m_RotationOrder: 4
   - From: cam1
     To: Third Person Camera
     Blend:
@@ -34,4 +34,4 @@ MonoBehaviour:
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
-        m_RotationOrder: 0
+        m_RotationOrder: 4

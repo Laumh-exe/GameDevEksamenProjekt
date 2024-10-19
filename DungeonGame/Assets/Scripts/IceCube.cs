@@ -5,7 +5,7 @@ public class IceCube : MonoBehaviour
     private float meltSpeed = .5f;
     
     private void Update(){
-        if(transform.localScale.y < 0.3){
+        if(transform.localScale.y < 0.4){
             Destroy(gameObject);
         }
     }

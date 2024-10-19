@@ -300,8 +300,8 @@ MonoBehaviour:
   followTarget: {fileID: 7693482467998630306}
   rotationPower: 0.3
   mainCamera: {fileID: 0}
-  moveSpeed: 5
-  groundDrag: 5
+  moveSpeed: 7
+  groundDrag: 7
   jumpHeight: 5
   playerHeight: 2
   whatIsGround:

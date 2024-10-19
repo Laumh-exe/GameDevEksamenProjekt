@@ -76,7 +76,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: db23094aaeea1894fbf545eaa0ff24d7, type: 2}
+  - {fileID: 2100000, guid: f967ac9fbc53a2444b4584d98b9e8364, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laser: {fileID: 3523076781205987903}
+  isOn: 1
 --- !u!1 &5809694688970419722
 GameObject:
   m_ObjectHideFlags: 0

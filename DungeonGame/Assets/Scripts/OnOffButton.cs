@@ -6,7 +6,7 @@ public class OnOffButton : MonoBehaviour{
     [SerializeField] private GameObject buttonObject;
     [SerializeField] private GameObject buttonPressedVisual;
 
-    bool IsOn = false;
+    [SerializeField] private bool IsOn = false;
 
     private void Start(){
         buttonPressedVisual.SetActive(IsOn);
